@@ -18,14 +18,16 @@ namespace Calculator
             while (true)
             {
                 try
-                {
-                    double firstNumber = GetValidNumber("Введите первое число: ");
-                    char sign = GetValidOperator();
-                    double secondNumber = GetValidNumber("Введите второе число: ");
-
-                    MathOperation operation = GetMathOperation(sign);
-
-                    double result = PerformOperation(firstNumber, secondNumber, operation);
+                {   
+                    Console.Write("Введите число: ");
+                    
+                    double firstNumber = GetNumberFromConsole();
+                    MathOperation operation = GetOperatorFromConsole();
+                    
+                    Console.Write("Введите число: ");
+                    
+                    double secondNumber = GetNumberFromConsole();
+                    double result = Calculate(firstNumber, secondNumber, operation);
 
                     Console.WriteLine($"Результат: {result}");
 
@@ -38,21 +40,19 @@ namespace Calculator
             }
         }
 
-        static double GetValidNumber(string message)
+        static double GetNumberFromConsole()
         {
             double number;
-            Console.Write(message);
 
             while (!double.TryParse(Console.ReadLine(), NumberStyles.Float, CultureInfo.CurrentCulture, out number))
             {
                 Console.WriteLine("Ошибка. Введите корректное число.");
-                Console.Write(message);
             }
 
             return number;
         }
 
-        static char GetValidOperator()
+        static MathOperation GetOperatorFromConsole()
         {
             string validOperators = "+-*/";
             Console.Write("Введите знак действия ( +, -, *, / ): ");
@@ -66,11 +66,7 @@ namespace Calculator
             }
 
             Console.Write("\n");
-            return sign;
-        }
-
-        static MathOperation GetMathOperation(char sign)
-        {
+            
             switch (sign)
             {
                 case '+': return MathOperation.Addition;
@@ -80,8 +76,8 @@ namespace Calculator
                 default: throw new ArgumentException("Неверный знак действия");
             }
         }
-
-        static double PerformOperation(double firstNumber, double secondNumber, MathOperation operation)
+        
+        static double Calculate(double firstNumber, double secondNumber, MathOperation operation)
         {
             switch (operation)
             {
