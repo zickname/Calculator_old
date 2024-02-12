@@ -57,12 +57,11 @@ namespace Calculator
             string validOperators = "+-*/";
             Console.Write("Введите знак действия ( +, -, *, / ): ");
             char sign = Console.ReadKey().KeyChar;
-
+            
             while (validOperators.IndexOf(sign) == -1)
             {
-                Console.WriteLine("\nОшибка. Вы ввели неверный знак.");
-                Console.Write("Введите знак действия ( +, -, *, / ): ");
-                sign = Console.ReadKey().KeyChar;
+                Console.Write("\nОшибка. Вы ввели неверный знак.\n");
+                return GetOperatorFromConsole();
             }
 
             Console.Write("\n");
