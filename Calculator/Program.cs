@@ -53,7 +53,7 @@ namespace Calculator
                 Console.Write("Введите знак действия ( +, -, *, / ): ");
                 sign = Console.ReadKey().KeyChar;
                 Console.WriteLine();
-            } while (!validOperators.Contains(sign.ToString()));
+            } while (validOperators.IndexOf(sign) == -1);
             
             switch (sign)
             {
