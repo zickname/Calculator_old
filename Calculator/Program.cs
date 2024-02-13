@@ -17,30 +17,21 @@ namespace Calculator
         {
             while (true)
             {
-                try
-                {   
-                    Console.Write("Введите число: ");
-                    
-                    double firstNumber = GetNumberFromConsole();
-                    MathOperation operation = GetOperatorFromConsole();
-                    
-                    Console.Write("Введите число: ");
-                    
-                    double secondNumber = GetNumberFromConsole();
-                    double result = Calculate(firstNumber, secondNumber, operation);
+                Console.Write("Введите число: ");
+                
+                double firstNumber = GetNumberFromConsole();
+                MathOperation operation = GetOperatorFromConsole();
+                
+                Console.Write("Введите число: ");
+                
+                double secondNumber = GetNumberFromConsole();
+                double result = Calculate(firstNumber, secondNumber, operation);
 
-                    Console.WriteLine($"Результат: {result}");
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Ошибка: {ex.Message}");
-                    Console.WriteLine("Попробуйте еще раз.");
-                }
+                Console.WriteLine($"Результат: {result}");
             }
         }
 
-        static double GetNumberFromConsole()
+        private static double GetNumberFromConsole()
         {
             double number;
 
@@ -52,19 +43,17 @@ namespace Calculator
             return number;
         }
 
-        static MathOperation GetOperatorFromConsole()
+        private static MathOperation GetOperatorFromConsole()
         {
+            char sign;
             string validOperators = "+-*/";
-            Console.Write("Введите знак действия ( +, -, *, / ): ");
-            char sign = Console.ReadKey().KeyChar;
             
-            while (validOperators.IndexOf(sign) == -1)
+            do
             {
-                Console.Write("\nОшибка. Вы ввели неверный знак.\n");
-                return GetOperatorFromConsole();
-            }
-
-            Console.Write("\n");
+                Console.Write("Введите знак действия ( +, -, *, / ): ");
+                sign = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+            } while (!validOperators.Contains(sign.ToString()));
             
             switch (sign)
             {
@@ -76,7 +65,7 @@ namespace Calculator
             }
         }
         
-        static double Calculate(double firstNumber, double secondNumber, MathOperation operation)
+        private static double Calculate(double firstNumber, double secondNumber, MathOperation operation)
         {
             switch (operation)
             {
